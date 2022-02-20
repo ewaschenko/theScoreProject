@@ -1,0 +1,115 @@
+
+<mat-card class="card-margin">
+	<div [formGroup]="rushingForm">
+		<mat-form-field appearance="standard" class="field-margin">
+			<mat-label>Filter</mat-label>
+			<input matInput formControlName="player" placeholder="Tom Brady" autocomplete="off" #input>
+		</mat-form-field>
+
+		<button mat-stroked-button color="primary" *ngIf="rushingSource.data.length == 0" (click)="postRushing()" [disabled]="isLoading">
+			<mat-icon>upgrade</mat-icon>
+			Load Rushing Data
+		</button>	
+
+		<button mat-stroked-button color="primary" *ngIf="rushingSource.data.length != 0" (click)="exporter.exportTable('csv')" >
+			<mat-icon>save</mat-icon>
+			Save Data
+		</button>	
+	</div>
+
+	<mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+
+	<table mat-table matTableExporter matSort [dataSource]="rushingSource" (matSortChange)="announceSortChange($event)" class="score-table" #exporter="matTableExporter">
+		<ng-container matColumnDef="Player">
+			<th mat-header-cell *matHeaderCellDef>Player</th>
+			<td mat-cell *matCellDef="let element">{{ element.player }}</td>
+		</ng-container>
+	
+		<ng-container matColumnDef="Team">
+			<th mat-header-cell *matHeaderCellDef>Team</th>
+			<td mat-cell *matCellDef="let element">{{ element.team }}</td>
+		</ng-container>
+	
+		<ng-container matColumnDef="Position">
+			<th mat-header-cell *matHeaderCellDef>Position</th>
+			<td mat-cell *matCellDef="let element">{{ element.pos }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="Att">
+			<th mat-header-cell *matHeaderCellDef>Rushing Attempts</th>
+			<td mat-cell *matCellDef="let element">{{ element.att }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="Att/G">
+			<th mat-header-cell *matHeaderCellDef>Att/G</th>
+			<td mat-cell *matCellDef="let element">{{ element.attG }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="Yds">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header="yds">Yds</th>
+			<td mat-cell *matCellDef="let element">{{ element.yds }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="Yds/G">
+			<th mat-header-cell *matHeaderCellDef>Yds/G</th>
+			<td mat-cell *matCellDef="let element">{{ element.ydsG }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="Avg">
+			<th mat-header-cell *matHeaderCellDef>Avg</th>
+			<td mat-cell *matCellDef="let element">{{ element.avg }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="TD">
+			<th mat-header-cell *matHeaderCellDef  mat-sort-header="td">TD</th>
+			<td mat-cell *matCellDef="let element">{{ element.td }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="Lng">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header="lng">Lng</th>
+			<td mat-cell *matCellDef="let element">{{ element.lng }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="1st">
+			<th mat-header-cell *matHeaderCellDef>1st</th>
+			<td mat-cell *matCellDef="let element">{{ element.firstDowns }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="1st%">
+			<th mat-header-cell *matHeaderCellDef>1st%</th>
+			<td mat-cell *matCellDef="let element">{{ element.first_dofirstDownPercentwn_percent }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="20+">
+			<th mat-header-cell *matHeaderCellDef>20+</th>
+			<td mat-cell *matCellDef="let element">{{ element.rushingTwenty }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="40+">
+			<th mat-header-cell *matHeaderCellDef>40+</th>
+			<td mat-cell *matCellDef="let element">{{ element.rushingFourty }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="FUM">
+			<th mat-header-cell *matHeaderCellDef>FUM</th>
+			<td mat-cell *matCellDef="let element">{{ element.fum }}</td>
+		</ng-container>
+	
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+		<div *ngIf="!isLoading">
+			<tr class="mat-row" *matNoDataRow>
+				<td class="mat-cell" colspan="4">No players matching the filter "{{input.value}}"</td>
+			</tr>
+		</div>
+	</table>
+	<mat-paginator 	
+					[length]="totalCount"
+					[pageIndex]="currentPage"
+					[pageSize]="pageSize"
+					[pageSizeOptions]="[10, 25, 50, 100, 500]"
+					(page)="handlePagination($event)"
+					showFirstLastButtons>
+	</mat-paginator>
+</mat-card>  
