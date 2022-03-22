@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 namespace theScoreAPI.Shared.Models
@@ -5,7 +6,7 @@ namespace theScoreAPI.Shared.Models
 	[JsonObject(MemberSerialization.OptIn)]
 	public class Rushing
 	{
-        [JsonProperty(PropertyName = "id")]
+		[JsonProperty(PropertyName = "id")]
 		public int Id { get; set; }
 
 		[JsonProperty(PropertyName = "Player")]
@@ -14,7 +15,7 @@ namespace theScoreAPI.Shared.Models
 		[JsonProperty(PropertyName = "Team")]
 		public string Team { get; set; } = String.Empty;
 
-	    [JsonProperty(PropertyName = "Pos")]
+		[JsonProperty(PropertyName = "Pos")]
 		public string Pos { get; set; } = String.Empty;
 
 		[JsonProperty(PropertyName = "Att")]
@@ -26,8 +27,8 @@ namespace theScoreAPI.Shared.Models
 		[JsonProperty(PropertyName = "Yds")]
 		public decimal Yds { get; set; }
 
-	    [JsonProperty(PropertyName = "Yds/G")]
-	    public decimal YdsG { get; set; }
+		[JsonProperty(PropertyName = "Yds/G")]
+		public decimal YdsG { get; set; }
 
 		[JsonProperty(PropertyName = "Avg")]
 		public decimal Avg { get; set; }
@@ -36,7 +37,10 @@ namespace theScoreAPI.Shared.Models
 		public decimal TD { get; set; }
 
 		[JsonProperty(PropertyName = "Lng")]
-		public string LNG { get; set; } = String.Empty;
+		public string Lng { get; set; } = String.Empty;
+
+		[JsonProperty(PropertyName = "LngDistance")]
+		public int LngDistance { get; set; }
 
 		[JsonProperty(PropertyName = "1st")]
 		public decimal FirstDowns { get; set; }

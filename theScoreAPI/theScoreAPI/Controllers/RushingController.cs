@@ -24,10 +24,10 @@ namespace theScoreAPI.Controllers
 			return Ok(await _rushingService.GetRushings(search));
 		}
 
-        [HttpPost(Name = "PostRushing")]
-        public async Task<ActionResult<RushingDTO>> Post()
-        {
-            return Ok(await _rushingService.PostRushings());
-        }
-    }
+		[HttpPost(Name = "PostRushing")]
+		public async Task<ActionResult<RushingDTO>> Post()
+		{
+			return Ok(await _rushingService.PostRushings());
+		}
+	}
 }

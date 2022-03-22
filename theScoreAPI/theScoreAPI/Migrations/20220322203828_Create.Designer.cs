@@ -11,7 +11,7 @@ using theScoreAPI.Context;
 namespace theScoreAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220211204101_Create")]
+    [Migration("20220322203828_Create")]
     partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,9 +49,12 @@ namespace theScoreAPI.Migrations
                     b.Property<decimal>("FirstDowns")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("LNG")
+                    b.Property<string>("Lng")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LngDistance")
+                        .HasColumnType("int");
 
                     b.Property<string>("Player")
                         .IsRequired()
