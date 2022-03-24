@@ -86,7 +86,7 @@ namespace theScoreAPI.BusinessServices
 			int tableCount = await _dataContext.Rushings.CountAsync();
 			if(tableCount == 0)
 			{
-				string path = Directory.GetCurrentDirectory() + _config.GetValue<string>("RushingFileRelative");
+				string path = Directory.GetCurrentDirectory() + _config.GetValue<string>(Constants.RushingFileRelative);
 				List<Rushing> rushingJSON = JsonConvert.DeserializeObject<List<Rushing>>(File.ReadAllText(path)) ?? new List<Rushing>();
 				if(rushingJSON.Count > 0)
 				{

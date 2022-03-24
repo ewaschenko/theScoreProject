@@ -10,5 +10,7 @@
 		public const string TotalRushingYards = "yds";
 		public const string TotalRushingTouchdowns = "td"; 
 		public const string LongestRush = "lng";
+
+		public const string RushingFileRelative = "RushingFileRelative";
 	}
 }
